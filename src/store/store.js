@@ -42,13 +42,13 @@ export const store = new Vuex.Store({
     }
   },
   mutations: {
-    addTask(state, taskName) {
+    addTask: (state, taskName) => {
       state.tasks.push(new Task(state.tasks.length, taskState.wip, taskName));
     },
-    changeFilterState(state, filterState) {
+    changeFilterState: (state, filterState) => {
       state.filterState = filterState;
     },
-    switchTaskState(state, taskId) {
+    switchTaskState: (state, taskId) => {
       const tmp = [];
       state.tasks.forEach(task => {
         if (task.id !== taskId) {
@@ -61,23 +61,23 @@ export const store = new Vuex.Store({
       })
       state.tasks = tmp;
     },
-    deleteTask(state, taskId) {
+    deleteTask: (state, taskId) => {
       const tmp = [];
       state.tasks.filter(task => task.id !== taskId).forEach(task => tmp.push(new Task(tmp.length, task.state, task.value)));
       state.tasks = tmp;
     }
   },
   actions: {
-    addTask(context, taskName) {
+    addTask: (context, taskName) => {
       context.commit('addTask', taskName);
     },
-    deleteTask(context, taskId) {
+    deleteTask: (context, taskId) => {
       context.commit('deleteTask', taskId);
     },
-    switchTaskState(context, taskId) {
+    switchTaskState: (context, taskId) => {
       context.commit('switchTaskState', taskId);
     },
-    changeFilterState(context, filterState) {
+    changeFilterState: (context, filterState) => {
       context.commit('changeFilterState', filterState);
     }
   }
